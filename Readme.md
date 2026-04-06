@@ -51,6 +51,7 @@ Option 1: Temporary container
 docker run -d --name jenkins_temp -p 8080:8080 -p 50000:50000 jenkins/jenkins:lts-jdk21
 Runs Jenkins in detached mode (-d)
 Exposes 8080 (web UI) and 50000 (agent connections)
+
 Option 2: Persistent container (Recommended)
 docker volume create jenkins_home
 
