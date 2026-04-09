@@ -1,0 +1,27 @@
+/**
+ * # Environment-Selection Jenkins Pipeline
+ * * This pipeline utilizes choice parameters to facilitate controlled deployments across the SDLC.
+ * * ## Key Features:
+ * - **Restricted Inputs**: Uses a 'choice' parameter to limit deployment targets to predefined environments (TEST, DEV, QA, PRE-PROD, PROD).
+ * - **Audit Trail**: Logs the selected environment to the console output for traceability.
+ * - **Human-in-the-loop**: Designed for "Build with Parameters" execution to prevent accidental production deployments.
+ * * ## Configuration:
+ * - Parameter Name: 'deployEnv'
+ * - Default Selection: 'TEST'
+ */
+
+pipeline{
+    agent any 
+
+    parameters{
+        choice(choices:["TEST","DEV","QA","PRE-PROD","PROD"], description: "Which environment to deploy in?", name:"deployEnv")
+    }
+
+    stages{
+        stage("Demo"){
+            steps{
+                echo "Choice isset to: ${params.deployEnv}"
+            }
+        }
+    }
+}

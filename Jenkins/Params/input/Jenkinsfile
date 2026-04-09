@@ -1,0 +1,26 @@
+/**
+ * # Parameterized Demo Pipeline
+ * * This pipeline demonstrates how to use build parameters to influence pipeline logic.
+ * * ## Key Features:
+ * - **User Input**: Defines a string parameter 'deployEnv' to select a target environment.
+ * - **Environment Logic**: Defaults to 'TEST', providing a safe fallback for automated triggers.
+ * - **Dynamic Output**: Echoes the selected environment to the console output.
+ * * ## Usage:
+ * - Run via "Build with Parameters" in the Jenkins UI to select between TEST, STAGING, or PROD.
+ */
+
+pipeline{
+    agent any 
+
+    parameters{
+        string(defaultValue: "TEST", description: "Which environment to deploy in?", name:"deployEnv")
+    }
+
+    stages{
+        stage("Demo"){
+            steps{
+                echo "String isset to: ${params.deployEnv}"
+            }
+        }
+    }
+}

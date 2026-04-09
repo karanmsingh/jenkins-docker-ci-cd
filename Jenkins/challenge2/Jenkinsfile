@@ -1,0 +1,38 @@
+/**
+ * # Sequential Multi-Stage Pipeline Template
+ * * This pipeline defines a linear execution path through five distinct stages.
+ * * ## Key Features:
+ * - **Stage Separation**: Demonstrates how to isolate tasks (e.g., Build, Test, Deploy) into independent blocks.
+ * - **Visual Tracking**: Each stage appears as a separate column in the Jenkins Blue Ocean/Stage View UI.
+ * - **Sequential Flow**: Ensures that Stage 2 only begins after the successful completion of Stage 1.
+ * * ## Purpose:
+ * - Serves as a foundational structural template for complex orchestration workflows.
+ */
+
+pipeline{
+    agent any
+    stages {
+        stage("Stage 1") {
+            steps{echo "This is Stage 1"}
+         
+
+        }
+        stage("Stage 2") {
+            steps{echo "This is Stage 1"}
+
+        }
+        stage("Stage 3") {
+            steps{echo "This is Stage 1"}
+
+        }
+        stage("Stage 4") {
+            steps{echo "This is Stage 1"}
+
+        }
+        stage("Stage 5") {
+            steps{echo "This is Stage 1"}
+
+        }
+    }
+    
+}

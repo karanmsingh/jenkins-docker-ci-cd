@@ -1,0 +1,26 @@
+/**
+ * # Feature-Toggle Jenkins Pipeline
+ * * This pipeline demonstrates the use of Boolean parameters to control job execution flow.
+ * * ## Key Features:
+ * - **Feature Toggling**: Includes a checkbox parameter ('myBoolean') to enable or disable specific services or logic.
+ * - **Safe Defaults**: The parameter defaults to 'false' to ensure optional features are opt-in only.
+ * - **Conditional Traceability**: Prints the current state of the toggle to the console for debugging.
+ * * ## Use Case:
+ * - Ideal for "on/off" logic such as 'Run Security Scan?' or 'Deploy to Backup Region?'.
+ */
+
+pipeline{
+    agent any 
+
+    parameters{
+        booleanParam(defaultValue: false, description: "Enable service?", name:"myBooloean")
+    }
+
+    stages{
+        stage("Demo"){
+            steps{
+                echo "booleanParam isset to: ${params.myBoolean}"
+            }
+        }
+    }
+}

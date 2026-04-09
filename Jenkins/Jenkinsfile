@@ -1,0 +1,47 @@
+/**
+ * # Jenkins CI Pipeline for Java Maven Application
+ * * This Declarative Pipeline automates the lifecycle of a simple Java Maven application.
+ * * ## Workflow Stages:
+ * 1. **Clean Up**: Ensures a fresh workspace by deleting previous build artifacts.
+ * 2. **Clone Repo**: Pulls the latest source code from the remote GitHub repository.
+ * 3. **Build**: Navigates to the project directory and compiles the code using 'mvn clean install'.
+ * 4. **Test**: Runs the automated test suite to ensure code quality and stability.
+ * * ## Requirements:
+ * - Jenkins 'Pipeline' plugin.
+ * - Maven installed on the Jenkins agent.
+ * - Git installed on the Jenkins agent.
+ */
+
+
+pipeline{
+    agent any 
+    stages{
+        stage("Clean Up") { //Best practice to clean up any remains from previous jobs 
+            steps {
+                deleteDir()
+            }
+        } 
+        stage("Clone Repo") {
+            steps{
+                sh "git clone https://github.com/jenkins-docs/simple-java-maven-app.git"
+            }
+        }
+        stage("Build") {
+            steps {
+                dir("simple-java-maven-app"){ // just like linux cd 
+                sh "mvn clean install" //build the java file and clean removes any previous libraries
+            }
+            }
+
+        }
+        stage ("Test") {
+            steps{
+                dir("simple-java-maven-app") {
+                    sh "mvn test"
+                }
+            }
+
+        }
+
+        }
+}

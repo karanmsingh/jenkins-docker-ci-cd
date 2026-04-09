@@ -1,0 +1,34 @@
+/**
+ * # Multi-Parameter Infrastructure Deployment Pipeline
+ * * This pipeline orchestrates complex deployments using a combination of input types.
+ * * ## Input Parameters:
+ * - **deployEnv (String)**: User-defined environment name (e.g., Staging-Alpha).
+ * - **deployAZ (Choice)**: Restricted selection of AWS Availability Zones (EU-WEST-2 region).
+ * - **confirmDeploy (Boolean)**: A final safety gate to authorize the deployment execution.
+ * * ## Workflow:
+ * - Captures multi-dimensional deployment metadata.
+ * - Outputs a formatted summary of the deployment configuration to the console.
+ * - Designed to be extended with 'when' directives for targeted cloud provisioning.
+ */
+
+pipeline{
+    agent any 
+
+    parameters{
+        string(defaultValue: "", description: "Which environment to deploy in?", name:"deployEnv")
+        choice(choices: ["EU-WEST-2A", "EU-WEST-2B",'EU-WEST-2C'], description: "Which AZ to deploy in?", name:"deployAZ")
+        booleanParam(defaultValue:false, description:"CONFIRM DEPLOYMENT?", name:"confirmDeploy")    
+    }
+
+    
+    
+    stages{
+        stage("Demo"){
+            steps{
+                echo "Environment is set to: ${params.deployEnv} \n"
+                echo "AZ is set to: ${params.deployAZ} \n"
+                echo "Deployment is set to: ${params.confirmDeploy} \n"
+            }
+        }
+    }
+}
